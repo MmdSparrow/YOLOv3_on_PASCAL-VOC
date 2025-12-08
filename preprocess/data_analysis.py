@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 
 
 from collections import Counter
-from configs.VOC_dataset_configs import ANNOTATION_PATH
+from configs.VOC_dataset_configs import ANNOTATIONS_PATH
 from configs.common_configs import DATA_ANALYSIS_RESULTS_PATH
 
 
@@ -16,7 +16,7 @@ class DataAnalysis:
     def __init__(self):
         os.makedirs(DATA_ANALYSIS_RESULTS_PATH, exist_ok=True)
         self.results_file_path= os.path.join(DATA_ANALYSIS_RESULTS_PATH, 'result.txt')
-        self.xml_files = [os.path.join(ANNOTATION_PATH, f) for f in os.listdir(ANNOTATION_PATH) if f.endswith('.xml')]
+        self.xml_files = [os.path.join(ANNOTATIONS_PATH, f) for f in os.listdir(ANNOTATIONS_PATH) if f.endswith('.xml')]
         
     def class_distribution(self):
         class_counts = Counter()
