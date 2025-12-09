@@ -6,6 +6,8 @@ dataset/
 
 # project outputs
 checkpoints/
+pre-trained_checkpoints/
+runs/
 logs/
 results/
 

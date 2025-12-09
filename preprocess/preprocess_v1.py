@@ -1,4 +1,5 @@
 import os
+import shutil
 import xml.etree.ElementTree as ET
 
 from pathlib import Path
@@ -7,7 +8,7 @@ from configs.common_configs import DATA_PREPROCESS_OUTPUTS_PATH, LABELS_DIR_PATH
 from configs.VOC_dataset_configs import IMAGE_SETS_PATH, IMAGES_PATH, CLASS_NAMES, ANNOTATIONS_PATH
 
 
-class Preprocess:
+class PreprocessV1:
     def __create_split_file_indexes(self, split_name):
         source_file_path = os.path.join(IMAGE_SETS_PATH, split_name + '.txt')
         output_file_path = os.path.join(DATA_PREPROCESS_OUTPUTS_PATH, split_name + '.txt')
@@ -22,6 +23,10 @@ class Preprocess:
     def __init__(self):
         os.makedirs(LABELS_DIR_PATH, exist_ok=True)
         os.makedirs(DATA_PREPROCESS_OUTPUTS_PATH, exist_ok=True)
+        os.makedirs(os.path.join(DATA_PREPROCESS_OUTPUTS_PATH, 'images', 'train'), exist_ok=True)
+        os.makedirs(os.path.join(DATA_PREPROCESS_OUTPUTS_PATH, 'images', 'val'), exist_ok=True)
+        os.makedirs(os.path.join(DATA_PREPROCESS_OUTPUTS_PATH, 'labels', 'train'), exist_ok=True)
+        os.makedirs(os.path.join(DATA_PREPROCESS_OUTPUTS_PATH, 'labels', 'val'), exist_ok=True)
         
         self.__create_split_file_indexes('train')
         self.__create_split_file_indexes('val')
@@ -32,7 +37,7 @@ class Preprocess:
             val_image_paths = f.read().splitlines()
 
         self.all_image_paths = train_image_paths + val_image_paths
-        
+
     def __convert_annotation(self, image_path):
         try:
             basename = os.path.splitext(os.path.basename(image_path))[0]

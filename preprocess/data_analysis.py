@@ -50,7 +50,7 @@ class DataAnalysis:
         class_df = pd.DataFrame(class_counts.most_common(), columns=["Class", "Count"])
 
         plt.figure(figsize=(12, 8))
-        sns.barplot(x='Count', y='Class', data=class_df, palette='viridis')
+        sns.barplot(x='Count', y='Class', data=class_df, palette='plasma')
         plt.title('Class Distribution in PASCAL VOC 2007', fontsize=16)
         plt.xlabel('Number of Objects', fontsize=12)
         plt.ylabel('Class Name', fontsize=12)
